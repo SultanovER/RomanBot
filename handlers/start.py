@@ -2,6 +2,8 @@ from aiogram import Router, types, F
 from aiogram.filters import Command
 import logging
 
+from keyboards.all_keyboards import start_kb
+
 start_router = Router()
 
 
@@ -31,12 +33,12 @@ async def start(message: types.Message):
         ]
     )
     logging.info(message.from_user)
-    await message.answer(f"Привет {message.from_user.username}", reply_markup=kb)
+    await message.answer(f"Привет {message.from_user.username}", reply_markup=start_kb())
 
 @start_router.callback_query(F.data == "about")
 async def cool(callback: types.CallbackQuery):
     await callback.message.answer("Всякая информация про рок-музыкантов и творчестве их и пр.")
-
+    
 @start_router.callback_query(F.data == "Cobain")
 async def kurt(callback: types.CallbackQuery):
     await callback.message.answer("Курт Дональд Кобейн - лидер группы NIRVANA, которую основал вместе с Кристом Новоселичем(бас-гитарист). Родился в Абердине 1967")
@@ -48,3 +50,4 @@ async def egor(callback: types.CallbackQuery):
 @start_router.callback_query(F.data == "Tsoy")
 async def victor(callback: types.CallbackQuery):
     await callback.message.answer("Цой жив!... Виктор Робертович Цой - легенда!... Родился в Ленинграде. 1962 года рождения. Отец - Роберт Максимович Цой кореец, инженер; мать - Валентина Васильевна Гусева русская, учительница физ-культуры...  Увлекался музыкой, живописью, боевыми искусствами!... Тут даже не надо ничего говорить! ")
+
