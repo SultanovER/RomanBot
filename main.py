@@ -6,6 +6,7 @@ from handlers.start import start_router
 from handlers.picture import picture_router
 from handlers.all_genre import genres_router
 from handlers.survey import survey_router
+from handlers.music_info import music_router
 
 
 async def on_startup(bot: Bot):
@@ -14,7 +15,7 @@ async def on_startup(bot: Bot):
     db.populate_tables()
 
 async def main():
-    dp.include_routers(start_router, picture_router, genres_router, survey_router)
+    dp.include_routers(start_router, picture_router, genres_router, survey_router, music_router)
     dp.startup.register(on_startup)
     await dp.start_polling(bot)
     
